@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache-extras.beanshell:bsh:2.0b6">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache-extras.beanshell/bsh/2.0b6/fb418f9b33a0b951e9a2978b4b6ee93b2707e72f/bsh-2.0b6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache-extras.beanshell/bsh/2.0b6/76a65f674e8f2df409934824c49ca338987c63ae/bsh-2.0b6-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

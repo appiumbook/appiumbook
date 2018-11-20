@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.openpnp:opencv:3.2.0-1">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openpnp/opencv/3.2.0-1/98bc368c7b490392fbe05a4121b7781fc112fbe8/opencv-3.2.0-1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.openpnp/opencv/3.2.0-1/406def083d4bef21da43db4bf25c944a3d6092ae/opencv-3.2.0-1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
