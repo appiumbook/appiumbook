@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Android Test Suite" parallel="tests" thread-count="2">
+    <test name="test1">
+        <parameter name="platformVersion" value="7.0"/>
+        <parameter name="deviceName" value="B6AUTSZDYPSOZD7S"/>
+        <parameter name="port" value="4729"/>
+        <classes>
+            <class name="testcases.AndroidTestCases"/>
+        </classes>
+    </test>
+
+    <test name="test2">
+        <parameter name="platformVersion" value="8.0"/>
+        <parameter name="deviceName" value="c4e3f3cd"/>
+        <parameter name="port" value="4730"/>
+        <classes>
+            <class name="testcases.AndroidTestCases"/>
+        </classes>
+    </test>
+
+    <!--<test name="test3">-->
+        <!--<parameter name="wda" value="8300"/>-->
+        <!--<parameter name="deviceName" value="iPhone X"/>-->
+        <!--<parameter name="port" value="4727"/>-->
+        <!--<classes>-->
+            <!--<class name="testcases.AndroidTestCases"/>-->
+        <!--</classes>-->
+    <!--</test>-->
+
+</suite>

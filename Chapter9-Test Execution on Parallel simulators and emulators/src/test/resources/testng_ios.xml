@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite" parallel="tests" thread-count="3">
+    <test name="test1">
+        <parameter name="wda" value="8100"/>
+        <parameter name="deviceName" value="iPhone 7"/>
+        <parameter name="port" value="4725"/>
+        <classes>
+            <class name="testcases.IOSTestCases"/>
+        </classes>
+    </test>
+
+    <test name="test2">
+        <parameter name="wda" value="8200"/>
+        <parameter name="deviceName" value="iPhone 8"/>
+        <parameter name="port" value="4726"/>
+        <classes>
+            <class name="testcases.IOSTestCases"/>
+        </classes>
+    </test>
+
+    <test name="test3">
+        <parameter name="wda" value="8300"/>
+        <parameter name="deviceName" value="iPhone X"/>
+        <parameter name="port" value="4727"/>
+        <classes>
+            <class name="testcases.IOSTestCases"/>
+        </classes>
+    </test>
+
+</suite>
