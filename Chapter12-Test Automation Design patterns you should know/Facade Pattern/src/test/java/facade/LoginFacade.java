@@ -16,7 +16,6 @@ public class LoginFacade {
     private LoginPO loginPO;
     private DashboardPO dashboardPO;
 
-
     public LoginFacade(AppiumDriver driver) {
         this.driver = driver;
     }
@@ -37,7 +36,6 @@ public class LoginFacade {
         } else
             return dashboardPO;
     }
-
 
     public void loginAndLogout(String username, String password) {
         getLoginPO().setUsernameTextField(username);
