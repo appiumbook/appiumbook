@@ -10,7 +10,6 @@ import java.util.List;
  * This class contains different custom asserts commonly used in medium tests
  *
  * @author Prat3ik on 25/09/18
- * @project cloudtimer.ios.automation
  */
 public class AssertUtils {
 

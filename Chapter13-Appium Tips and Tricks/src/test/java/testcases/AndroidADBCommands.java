@@ -1,16 +1,20 @@
 package testcases;
 
+import io.appium.java_client.android.AndroidDriver;
+import org.testng.annotations.BeforeTest;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Year: 2018-19
  *
  * @author Prat3ik on 22/12/18
- * @project POM_Automation_Framework
  */
-public class AndroidADBCommands {
+public class AndroidADBCommands extends BaseTest{
 
     public void checkWhichAndroidDevicesAreConnected() throws IOException {
         String line;
@@ -27,5 +31,11 @@ public class AndroidADBCommands {
         Process pc = pb.start();
         pc.waitFor();
         System.out.println("Finish!");
+    }
+
+    @BeforeTest
+    @Override
+    public void setUpPage() throws MalformedURLException {
+        androidDriver = new AndroidDriver(new URL(APPIUM_SERVER_URL), getDesiredCapabilitiesForAndroid());
     }
 }

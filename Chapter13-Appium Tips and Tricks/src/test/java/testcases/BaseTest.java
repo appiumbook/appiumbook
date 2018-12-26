@@ -2,7 +2,9 @@ package testcases;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.remote.AndroidMobileCapabilityType;
+import io.appium.java_client.remote.AutomationName;
 import io.appium.java_client.remote.MobileCapabilityType;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
@@ -28,15 +30,15 @@ import java.util.concurrent.TimeUnit;
  * Responsible for setting up the Appium test Driver
  *
  * @author Prat3ik on 22/11/18
- * @project POM_Automation_Framework
  */
 
-@Listeners({ScreenshotUtility.class})
+//@Listeners({ScreenshotUtility.class})
 public abstract class BaseTest {
     /**
-     * As driver static it will be created only once and used across all of the test classes.
+     * As androidDriver static it will be created only once and used across all of the test classes.
      */
-    public static AndroidDriver driver;
+    public static AndroidDriver androidDriver;
+    public static IOSDriver iosDriver;
     public final static String APPIUM_SERVER_URL = PropertyUtils.getProperty("appium.server.url", "http://127.0.0.1:4723/wd/hub");
     public final static int IMPLICIT_WAIT = PropertyUtils.getIntegerProperty("implicitWait", 30);
     public static WaitUtils waitUtils = new WaitUtils();
@@ -49,17 +51,14 @@ public abstract class BaseTest {
      * So we need to set up appium client in order to connect to Device Farm's appium server.
      */
     @BeforeMethod
-    public void setUpAppium() throws MalformedURLException {
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        setDesiredCapabilitiesForAndroid(capabilities);
-        driver = new AndroidDriver(new URL(APPIUM_SERVER_URL), capabilities);
+    public void setUpAppium() {
     }
 
     /**
      * This method will be called everytime before your test runs
      */
     @BeforeTest
-    public abstract void setUpPage();
+    public abstract void setUpPage() throws IOException;
 
 
     /**
@@ -69,15 +68,15 @@ public abstract class BaseTest {
     public void afterMethod(final ITestResult result) throws IOException {
         String fileName = result.getTestClass().getName() + "_" + result.getName();
         System.out.println("Test Case: [" + fileName + "] executed..!");
-        if (result.getStatus() == ITestResult.FAILURE || result.getStatus() == ITestResult.SKIP)
-            takeLocalScreenshot(result.getMethod().getMethodName().toLowerCase() + "_" + System.currentTimeMillis());
+//        if (result.getStatus() == ITestResult.FAILURE || result.getStatus() == ITestResult.SKIP)
+//            takeLocalScreenshot(result.getMethod().getMethodName().toLowerCase() + "_" + System.currentTimeMillis());
     }
 
     /**
      * This method will be called when test case is getting failed or skipped.
      */
     private void takeLocalScreenshot(String imageName) throws IOException {
-        File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+        File scrFile = ((TakesScreenshot) androidDriver).getScreenshotAs(OutputType.FILE);
         FileUtils.copyFile(scrFile, new File("failureScreenshots/" + imageName + ".png"));
     }
 
@@ -97,11 +96,12 @@ public abstract class BaseTest {
     }
 
     /**
-     * It will set the DesiredCapabilities for the local execution
+     * It will get the DesiredCapabilities for the Android.
      *
-     * @param desiredCapabilities
+     * @return DesiredCapabilities
      */
-    private void setDesiredCapabilitiesForAndroid(DesiredCapabilities desiredCapabilities) {
+    protected DesiredCapabilities getDesiredCapabilitiesForAndroid() {
+        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
         String PLATFORM_NAME = PropertyUtils.getProperty("android.platform");
         String PLATFORM_VERSION = PropertyUtils.getProperty("android.platform.version");
         String APP_NAME = PropertyUtils.getProperty("android.app.name");
@@ -123,10 +123,38 @@ public abstract class BaseTest {
         desiredCapabilities.setCapability(MobileCapabilityType.FULL_RESET, APP_FULL_RESET);
         desiredCapabilities.setCapability(MobileCapabilityType.NO_RESET, APP_NO_RESET);
         desiredCapabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
+        return desiredCapabilities;
+    }
+
+    /**
+     * It will get the DesiredCapabilities for the IOS
+     *
+     * @return DesiredCapabilities
+     */
+    protected DesiredCapabilities getDesiredCapabilitiesForIOS() {
+        DesiredCapabilities desiredCapabilities = new DesiredCapabilities();
+        String PLATFORM_NAME = PropertyUtils.getProperty("ios.platform");
+        String PLATFORM_VERSION = PropertyUtils.getProperty("ios.platform.version");
+        String APP_NAME = PropertyUtils.getProperty("ios.app.name");
+        String APP_RELATIVE_PATH = PropertyUtils.getProperty("ios.app.location") + APP_NAME;
+        String APP_PATH = getAbsolutePath(APP_RELATIVE_PATH);
+        String DEVICE_NAME = PropertyUtils.getProperty("ios.device.name");
+        String APP_FULL_RESET = PropertyUtils.getProperty("ios.app.full.reset");
+        String APP_NO_RESET = PropertyUtils.getProperty("ios.app.no.reset");
+
+        desiredCapabilities.setCapability(MobileCapabilityType.AUTOMATION_NAME, AutomationName.IOS_XCUI_TEST);
+        desiredCapabilities.setCapability(MobileCapabilityType.DEVICE_NAME, DEVICE_NAME);
+        desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_NAME, PLATFORM_NAME);
+        desiredCapabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, PLATFORM_VERSION);
+        desiredCapabilities.setCapability(MobileCapabilityType.APP, APP_PATH);
+        desiredCapabilities.setCapability(MobileCapabilityType.FULL_RESET, APP_FULL_RESET);
+        desiredCapabilities.setCapability(MobileCapabilityType.NO_RESET, APP_NO_RESET);
+        desiredCapabilities.setCapability(AndroidMobileCapabilityType.AUTO_GRANT_PERMISSIONS, true);
+        return desiredCapabilities;
     }
 
     public static WebDriver getScreenshotableWebDriver() {
-        final WebDriver augmentedDriver = new Augmenter().augment(driver);
+        final WebDriver augmentedDriver = new Augmenter().augment(androidDriver);
         return augmentedDriver;
     }
 
@@ -146,11 +174,11 @@ public abstract class BaseTest {
     }
 
     /**
-     * This will quite the android driver instance
+     * This will quite the android androidDriver instance
      */
     private void quitDriver() {
         try {
-            this.driver.quit();
+            this.androidDriver.quit();
         } catch (Exception e) {
             e.printStackTrace();
         }

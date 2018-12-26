@@ -4,7 +4,6 @@ package utils;
  * Year: 2018-19
  *
  * @author Prat3ik on 22/09/18
- * @project cloudtimer.ios.automation
  */
 
 import org.apache.commons.io.FileUtils;

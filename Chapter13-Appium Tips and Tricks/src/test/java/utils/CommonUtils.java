@@ -13,7 +13,6 @@ import java.util.regex.Pattern;
  * This class contains utility methods such as get random number, get dates etc. that can be used by other class
  *
  * @author Prat3ik on 27/09/18
- * @project cloudtimer.ios.automation
  */
 
 public class CommonUtils {
