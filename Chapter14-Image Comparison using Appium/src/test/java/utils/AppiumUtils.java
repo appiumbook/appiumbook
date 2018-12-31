@@ -31,7 +31,7 @@ public class AppiumUtils {
      * @param element
      * @return
      */
-    public static boolean isElementDisplayed(IOSElement element) {
+    public static boolean isElementDisplayed(AndroidElement element) {
         waitUtils.staticWait(500);
         boolean isPresent = false;
         try {
@@ -57,7 +57,7 @@ public class AppiumUtils {
                     .waitAction(waitOptions(ofSeconds(2)))
                     .moveTo(PointOption.point(200, -100)).release();
             swipe.perform();
-        } while (!isElementDisplayed((IOSElement) element)); //(i==2);
+        } while (!isElementDisplayed((AndroidElement) element)); //(i==2);
     }
 
     /**
@@ -71,7 +71,7 @@ public class AppiumUtils {
         int start_Y = (int) (size.getHeight() * 0.80);
         int end_Y = (int) (size.getHeight() * 0.20);
         int start_end_X = (int) (size.getWidth() * 0.50);
-        while (!isElementDisplayed((IOSElement) element)) {
+        while (!isElementDisplayed((AndroidElement) element)) {
             TouchAction swipe = new TouchAction(driver).press(PointOption.point(start_end_X, end_Y))
                     .waitAction(waitOptions(ofSeconds(2)))
                     .moveTo(PointOption.point(start_end_X, start_Y)).release().perform();

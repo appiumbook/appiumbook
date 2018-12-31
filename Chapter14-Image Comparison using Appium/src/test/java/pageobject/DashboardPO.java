@@ -2,7 +2,20 @@ package pageobject;
 
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.android.AndroidElement;
+import io.appium.java_client.ios.IOSElement;
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import org.openqa.selenium.NoSuchElementException;
+import org.testng.Assert;
+import utils.AppiumUtils;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Base64;
 
 
 /**
@@ -43,5 +56,29 @@ public class DashboardPO extends BasePO {
     public void tapOnSubmitButton() {
         submitButton.click();
     }
+
+    public String getBase64FormatOfImageFromURL(String URL) throws IOException, URISyntaxException {
+        URL url = new URL(URL);
+        try {
+            InputStream is = url.openStream();
+            //Base64.getEncoder().encodeToString(Files.readAllBytes("tes".toPath()));
+
+            byte[] bytes = org.apache.commons.io.IOUtils.toByteArray(is);
+            return org.apache.commons.codec.binary.Base64.encodeBase64String(bytes);
+        } catch (Exception e) {
+            throw new RuntimeException("Please check the network on your server! It seems disconnected.");
+        }
+    }
+
+    public void isImageAppearOnApplication(String base64FormatImage) throws IOException, URISyntaxException {
+        waitUtils.staticWait(5000);
+        try {
+        } catch (NoSuchElementException e) {
+            throw new RuntimeException("Expected image didn't display on Application!");
+        }
+    }
+
+
+
 
 }
