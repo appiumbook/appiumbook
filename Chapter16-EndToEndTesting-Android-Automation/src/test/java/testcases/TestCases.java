@@ -24,7 +24,7 @@ public class TestCases extends BaseTest {
 
         MessagesPO messagesPO = new MessagesPO(androidDriver);
 
-        NewConversationPO newConversationPO = messagesPO.clickOnStartNewConversationButton();
+        NewConversationPO newConversationPO = messagesPO.tapOnStartChatButton();
 
         ConversationPO conversationPO = newConversationPO.typeAndSubmitContactNumber(phoneNo);
         Assert.assertTrue(conversationPO.isConversationScreenDisplayed(), "Conversation screen didn't appear!");
@@ -32,7 +32,7 @@ public class TestCases extends BaseTest {
         conversationPO.tapOnSMSButton();
 
         Assert.assertTrue(conversationPO.isMessageSent(), "Message:'" + messageText + "' is not being sent!");
-        Assert.assertTrue(conversationPO.isLastSentMessageContains(timestamp), "Last sent message is different than expected!, Original message is: '" + conversationPO.getLastSentMessageText() + "', while the expected substing is: " + timestamp + "'");
+        Assert.assertTrue(conversationPO.isLastSentMessageContains(timestamp), "Last sent message is different than expected!, Original message is: '" + conversationPO.getLastSentMessageText() + "', while the expected substring is: " + timestamp + "'");
     }
 
     @BeforeTest

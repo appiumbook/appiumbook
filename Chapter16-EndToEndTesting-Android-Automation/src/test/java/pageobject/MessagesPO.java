@@ -13,7 +13,7 @@ import io.appium.java_client.pagefactory.AndroidFindBy;
 public class MessagesPO extends BasePO {
 
     @AndroidFindBy(id = "com.google.android.apps.messaging:id/start_new_conversation_button")
-    AndroidElement startNewConversationButton;
+    AndroidElement startChatButton;
 
     /**
      * A base constructor that sets the page's androidDriver
@@ -30,8 +30,8 @@ public class MessagesPO extends BasePO {
         super(driver);
     }
 
-    public NewConversationPO clickOnStartNewConversationButton() {
-        startNewConversationButton.click();
+    public NewConversationPO tapOnStartChatButton() {
+        startChatButton.click();
         return new NewConversationPO(driver);
     }
 
