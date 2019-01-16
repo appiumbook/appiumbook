@@ -70,15 +70,4 @@ public class DashboardPO extends BasePO {
         }
     }
 
-    public void isImageAppearOnApplication(String base64FormatImage) throws IOException, URISyntaxException {
-        waitUtils.staticWait(5000);
-        try {
-        } catch (NoSuchElementException e) {
-            throw new RuntimeException("Expected image didn't display on Application!");
-        }
-    }
-
-
-
-
 }

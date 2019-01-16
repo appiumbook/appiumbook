@@ -9,10 +9,22 @@ sourceCompatibility = 1.8
 
 repositories {
     mavenCentral()
+    maven { url 'https://jitpack.io' }
 }
 
 dependencies {
+//    testCompile group: 'junit', name: 'junit', version: '4.12'
+////    testCompile group: 'io.appium', name: 'java-client', version: '7.0.0'
+//    testCompile group: 'com.github.appium', name: 'java-client', version: 'c949fb6ad460bd2d4ecee4368e74cf3b85835aae'
+
+
     testCompile group: 'junit', name: 'junit', version: '4.12'
-    testCompile group: 'io.appium', name: 'java-client', version: '7.0.0'
+    //testCompile group: 'io.appium', name: 'java-client', version: '6.1.0'
+    testCompile group: 'com.github.appium', name: 'java-client', version: '6134e3cc9c56356cea70649798a384ee18fec30e'
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '3.13.0'
+    testCompile group: 'org.hamcrest', name: 'hamcrest-library', version: '1.3'
+
     testCompile group: 'org.testng', name: 'testng', version: '6.14.3'
+    testCompile group: 'com.jayway.restassured', name: 'rest-assured', version: '2.9.0'
+    testCompile group: 'com.google.code.gson', name: 'gson', version: '2.8.4'
 }

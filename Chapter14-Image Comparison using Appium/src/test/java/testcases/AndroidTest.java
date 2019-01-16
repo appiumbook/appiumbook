@@ -23,7 +23,7 @@ import java.net.URL;
  */
 public class AndroidTest extends BaseTest {
 
-    @Test
+    @Test(description = "Please set application name as: imageApp.apk")
     public void verifyImageIsBeingAppearedCorrectlyFromURLOnApp() throws IOException, URISyntaxException {
         String imageURL = "https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6009/6009665_sd.jpg;maxHeight=640;maxWidth=550";
 
