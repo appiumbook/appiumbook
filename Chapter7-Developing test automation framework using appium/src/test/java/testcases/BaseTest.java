@@ -35,7 +35,7 @@ public abstract class BaseTest {
     public static AppiumDriver driver;
     public final static String APPIUM_SERVER_URL = PropertyUtils.getProperty("appium.server.url", "http://127.0.0.1:4723/wd/hub");
     public final static int IMPLICIT_WAIT = PropertyUtils.getIntegerProperty("implicitWait", 30);
-    public static WaitUtils waitUtils = new WaitUtils();
+    public static WaitUtils waitUtils = new WaitUtils(); //waitUtil is already exists in BasePO class. why do we need it in test classes?
 
 
     /**
@@ -44,7 +44,7 @@ public abstract class BaseTest {
      * Appium is a client - server model:
      * So we need to set up appium client in order to connect to Device Farm's appium server.
      */
-    @BeforeMethod
+    @BeforeSuite
     public void setUpAppium() throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         setDesiredCapabilitiesForAndroid(capabilities);
